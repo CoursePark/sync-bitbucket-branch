@@ -11,18 +11,23 @@ let email;
 let password;
 
 // inspect the args passed at the command line and set dryrun, repo, sourceBranch, targetBranch
-for (let arg of process.argv.slice(2)) {
+for (const arg of process.argv.slice(2)) {
 	if (dryrun === undefined && arg === '--dryrun') {
 		dryrun = true;
-	} else if (repo === undefined) {
+	}
+	else if (repo === undefined) {
 		repo = arg;
-	} else if (sourceBranch === undefined) {
+	}
+	else if (sourceBranch === undefined) {
 		sourceBranch = arg;
-	} else if (targetBranch === undefined) {
+	}
+	else if (targetBranch === undefined) {
 		targetBranch = arg;
-	} else if (email === undefined) {
+	}
+	else if (email === undefined) {
 		email = arg;
-	} else if (password === undefined) {
+	}
+	else if (password === undefined) {
 		password = arg;
 	}
 }
@@ -35,9 +40,11 @@ if (password === undefined) {
 }
 
 if (!repo || !targetBranch || !email || !password) {
-	console.error('node sync-bitbucket-branch/cli.js [--dryrun] <repo> <source-branch> <target-branch> [<email>] [<password>]'); // eslint-disable-line no-console
-	console.error('sync-bitbucket-branch [--dryrun] <repo> <source-branch> <target-branch> [<email>] [<password>]'); // eslint-disable-line no-console
-	console.error('email and password may be set using environment variables BITBUCKET_ACCOUNT_EMAIL and BITBUCKET_ACCOUNT_PASSWORD');
+	console.error('sync-bitbucket-branch [--dryrun]' // eslint-disable-line no-console
+		+ ' <repo> <source-branch> <target-branch> [<email>] [<password>]\n'
+		+ 'email and password may be set using environment variables'
+		+ ' BITBUCKET_ACCOUNT_EMAIL and BITBUCKET_ACCOUNT_PASSWORD'
+	);
 	process.exit(); // eslint-disable-line no-process-exit
 }
 
